@@ -203,7 +203,12 @@ __run_prepost_install() {
 # run after primary post install function
 __run_post_install() {
   local getRunStatus=0
-
+  local city_id="${MYLOCATION_CITY_ID:-5106841}"
+  if [ -n "$city_id" ]; then
+    __replace_one "REPLACE_CITY_ID" "$city_id" "$APPDIR/themes/multicolor/theme.lua"
+    __replace_one "REPLACE_CITY_ID" "$city_id" "$APPDIR/themes/powerarrow/theme.lua"
+    __replace_one "REPLACE_CITY_ID" "$city_id" "$APPDIR/themes/powerarrow-blue/theme.lua"
+  fi
   return $getRunStatus
 }
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
